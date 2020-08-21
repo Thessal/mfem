@@ -2552,7 +2552,9 @@ public:
 class VectorDiffusionIntegrator : public BilinearFormIntegrator
 {
 protected:
-   Coefficient *Q;
+   Coefficient *Q{NULL};
+   VectorCoefficient *VQ{NULL};
+   MatrixCoefficient *MQ{NULL};
 
    // PA extension
    const DofToQuad *maps;         ///< Not owned
@@ -2566,12 +2568,19 @@ protected:
 private:
    DenseMatrix dshape, dshapedxt, pelmat;
    DenseMatrix Jinv, gshape;
+   int vdim {-1};
+   DenseMatrix mcoeff;
+   Vector vcoeff;
 
 public:
    VectorDiffusionIntegrator()
       : Q(NULL), ceedDataPtr(NULL) { }
    VectorDiffusionIntegrator(Coefficient &q)
       : Q(&q), ceedDataPtr(NULL) { }
+   VectorDiffusionIntegrator(VectorCoefficient &vq)
+      : VQ(&vq), vdim(vq.GetVDim()), ceedDataPtr(NULL) { }
+   VectorDiffusionIntegrator(MatrixCoefficient& mq)
+      : MQ(&mq), vdim(mq.GetVDim()), ceedDataPtr(NULL) { }
 
    virtual ~VectorDiffusionIntegrator()
    {
