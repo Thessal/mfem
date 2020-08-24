@@ -2271,9 +2271,10 @@ void VectorDiffusionIntegrator::AssembleElementMatrix(
       mcoeff.SetSize(vdim);
    }
 
-   elmat.SetSize(vdim * dof);
    dshape.SetSize(dof, dim);
-   dshapedxt.SetSize(dof, vdim);
+   dshapedxt.SetSize(dof, sdim);
+
+   elmat.SetSize(vdim * dof);
    pelmat.SetSize(dof);
 
    const IntegrationRule *ir = IntRule;
@@ -2288,9 +2289,9 @@ void VectorDiffusionIntegrator::AssembleElementMatrix(
    {
 
       const IntegrationPoint &ip = ir->IntPoint(i);
-      el.CalcDShape (ip, dshape);
+      el.CalcDShape(ip, dshape);
 
-      Trans.SetIntPoint (&ip);
+      Trans.SetIntPoint(&ip);
       double w{Trans.Weight()};
       w = ip.weight / (square ? w : w*w*w);
       // AdjugateJacobian = / adj(J),         if J is square
