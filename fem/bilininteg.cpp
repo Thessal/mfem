@@ -2319,10 +2319,12 @@ void VectorDiffusionIntegrator::AssembleElementMatrix(
       }
       else
       {
-         if (Q) w *= Q->Eval(Trans, ip);
+         if (Q) { w *= Q->Eval(Trans, ip); }
          Mult_a_AAt(w, dshapedxt, pelmat);
          for (int k{0}; k < vdim; ++k)
+         {
             elmat.AddMatrix(pelmat, dof*k, dof*k);
+         }
       }
 
    }
@@ -2364,7 +2366,6 @@ void VectorDiffusionIntegrator::AssembleElementVector(
       CalcAdjugate(Tr.Jacobian(), Jinv);
       double w{ip.weight / Tr.Weight()};
 
-      // TODO evaluation here
       if (VQ)
       {
          mfem_error("VectorDiffusionIntegrator::AssembleElementVector \n"
@@ -2377,7 +2378,7 @@ void VectorDiffusionIntegrator::AssembleElementVector(
       }
       else
       {
-         if (Q) w *= Q->Eval(Tr, ip);
+         if (Q) { w *= Q->Eval(Tr, ip); }
       }
 
       MultAAt(Jinv, gshape);
