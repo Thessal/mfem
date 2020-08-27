@@ -2575,8 +2575,12 @@ private:
 public:
    VectorDiffusionIntegrator()
       : Q(NULL), ceedDataPtr(NULL) { }
+   VectorDiffusionIntegrator(int vector_dimension)
+      : vdim(vector_dimension), ceedDataPtr(NULL) { }
    VectorDiffusionIntegrator(Coefficient &q)
       : Q(&q), ceedDataPtr(NULL) { }
+   VectorDiffusionIntegrator(Coefficient &q, int vector_dimension)
+      : Q(&q), vdim(vector_dimension), ceedDataPtr(NULL) { }
    VectorDiffusionIntegrator(VectorCoefficient &vq)
       : VQ(&vq), vdim(vq.GetVDim()), ceedDataPtr(NULL) { }
    VectorDiffusionIntegrator(MatrixCoefficient& mq)
