@@ -31,7 +31,7 @@ then
     upstream_opt=""
     if [[ ${CI_COMMIT_BRANCH:-"master"} != "master" && ${sys_type} != "" ]]
     then
-        upstream_opt="--upstream=/usr/workspace/mfem/mfem-spack-upstream"
+        upstream_opt="--upstream=/usr/workspace/mfem/mfem-spack-upstream/uberenv_libs/spack/opt"
     fi
 
     prefix_opt=""
