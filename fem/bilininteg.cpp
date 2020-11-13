@@ -2321,7 +2321,6 @@ void VectorDiffusionIntegrator::AssembleElementMatrix(
          Mult_a_AAt(w, dshapedxt, pelmat);
          for (int k = 0; k < vdim; ++k)
          {
-            AddMult_a_AAt(w*vcoeff(k), dshapedxt, pelmat);
             elmat.AddMatrix(pelmat, dof*k, dof*k);
          }
       }
