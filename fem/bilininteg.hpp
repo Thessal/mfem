@@ -2569,7 +2569,7 @@ protected:
    Vector pa_data;
 
    // CEED extension
-   CeedData* ceedDataPtr;
+   CeedData* ceedDataPtr = NULL;
 
 private:
    DenseMatrix dshape, dshapedxt, pelmat;
@@ -2578,8 +2578,7 @@ private:
    Vector vcoeff;
 
 public:
-   VectorDiffusionIntegrator()
-      : Q(NULL), ceedDataPtr(NULL) { }
+   VectorDiffusionIntegrator() { }
 
    /** \brief Integrator with unit coefficient for caller-specified vector dimension.
 
@@ -2587,10 +2586,10 @@ public:
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
    VectorDiffusionIntegrator(int vector_dimension)
-      : vdim(vector_dimension), ceedDataPtr(NULL) { }
+      : vdim(vector_dimension) { }
 
    VectorDiffusionIntegrator(Coefficient &q)
-      : Q(&q), ceedDataPtr(NULL) { }
+      : Q(&q) { }
 
    /** \brief Integrator with scalar coefficient for caller-specified vector dimension.
 
@@ -2601,7 +2600,7 @@ public:
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
    VectorDiffusionIntegrator(Coefficient &q, int vector_dimension)
-      : Q(&q), vdim(vector_dimension), ceedDataPtr(NULL) { }
+      : Q(&q), vdim(vector_dimension) { }
 
    /** \brief Integrator with \c VectorCoefficient. The vector dimension of the \c FiniteElementSpace is assumed to be the same as the dimension of the \c Vector.
 
@@ -2611,7 +2610,7 @@ public:
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
    VectorDiffusionIntegrator(VectorCoefficient &vq)
-      : VQ(&vq), vdim(vq.GetVDim()), ceedDataPtr(NULL) { }
+      : VQ(&vq), vdim(vq.GetVDim()) { }
 
    /** \brief Integrator with \c MatrixCoefficient. The vector dimension of the \c FiniteElementSpace is assumed to be the same as the dimension of the \c Vector.
 
@@ -2622,7 +2621,7 @@ public:
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
    VectorDiffusionIntegrator(MatrixCoefficient& mq)
-      : MQ(&mq), vdim(mq.GetVDim()), ceedDataPtr(NULL) { }
+      : MQ(&mq), vdim(mq.GetVDim()) { }
 
    virtual ~VectorDiffusionIntegrator()
    {
