@@ -658,7 +658,7 @@ class Mfem(Package):
         make('info', parallel=False)
 
         # Uberenv: Save the config_mk with a spec dependent name
-        copy(str(self.config_mk),self._get_host_config_path(spec))
+        copy('config/config.mk',self._get_host_config_path(spec))
 
     def build(self, spec, prefix):
         make('lib')
