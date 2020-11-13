@@ -2276,20 +2276,7 @@ void VectorDiffusionIntegrator::AssembleElementMatrix(
    const IntegrationRule *ir = IntRule;
    if (ir == NULL)
    {
-<<<<<<< HEAD
       ir = &DiffusionIntegrator::GetRule(el,el);
-=======
-      // integrand is rational function if det(J) is not constant
-      const int order = 2 * Trans.OrderGrad(&el); // order of the numerator
-      if (el.Space() == FunctionSpace::rQk)
-      {
-         ir = &RefinedIntRules.Get(el.GetGeomType(), order);
-      }
-      else
-      {
-         ir = &IntRules.Get(el.GetGeomType(), order);
-      }
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
    }
 
    elmat = 0.0;
@@ -2308,7 +2295,6 @@ void VectorDiffusionIntegrator::AssembleElementMatrix(
       Mult(dshape, Trans.AdjugateJacobian(), dshapedxt);
 
       if (VQ)
-<<<<<<< HEAD
       {
          VQ->Eval(vcoeff, Trans, ip);
          for (int k = 0; k < vdim; ++k)
@@ -2338,40 +2324,7 @@ void VectorDiffusionIntegrator::AssembleElementMatrix(
             elmat.AddMatrix(pelmat, dof*k, dof*k);
          }
       }
-=======
-      {
-         VQ->Eval(vcoeff, Trans, ip);
-         for (int k = 0; k < vdim; ++k)
-         {
-            Mult_a_AAt(w*vcoeff(k), dshapedxt, pelmat);
-            elmat.AddMatrix(pelmat, dof*k, dof*k);
-         }
-      }
-      else if (MQ)
-      {
-         MQ->Eval(mcoeff, Trans, ip);
-         for (int i = 0; i < vdim; ++i)
-         {
-            for (int j = 0; j < vdim; ++j)
-            {
-               Mult_a_AAt(w*mcoeff(i,j), dshapedxt, pelmat);
-               elmat.AddMatrix(pelmat, dof*i, dof*j);
-            }
-         }
-      }
-      else
-      {
-         if (Q) { w *= Q->Eval(Trans, ip); }
-         Mult_a_AAt(w, dshapedxt, pelmat);
-         for (int k = 0; k < vdim; ++k)
-         {
-            elmat.AddMatrix(pelmat, dof*k, dof*k);
-         }
-      }
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
-
    }
-
 }
 
 void VectorDiffusionIntegrator::AssembleElementVector(
@@ -2409,15 +2362,7 @@ void VectorDiffusionIntegrator::AssembleElementVector(
    const IntegrationRule *ir = IntRule;
    if (ir == NULL)
    {
-<<<<<<< HEAD
       ir = &DiffusionIntegrator::GetRule(el,el);
-=======
-      // integrand is rational function if det(J) is not constant
-      const int order = 2 * Tr.OrderGrad(&el); // order of the numerator
-      ir = (el.Space() == FunctionSpace::rQk) ?
-           &RefinedIntRules.Get(el.GetGeomType(), order) :
-           &IntRules.Get(el.GetGeomType(), order);
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
    }
 
    elvect = 0.0;

@@ -2578,29 +2578,19 @@ private:
    Vector vcoeff;
 
 public:
-<<<<<<< HEAD
    VectorDiffusionIntegrator()
       : Q(NULL), ceedDataPtr(NULL) { }
-=======
-   VectorDiffusionIntegrator() {}
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
 
    /** \brief Integrator with unit coefficient for caller-specified vector dimension.
 
       If the vector demension does not match the true dimension of the \c
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
-<<<<<<< HEAD
    VectorDiffusionIntegrator(int vector_dimension)
       : vdim(vector_dimension), ceedDataPtr(NULL) { }
 
    VectorDiffusionIntegrator(Coefficient &q)
       : Q(&q), ceedDataPtr(NULL) { }
-=======
-   VectorDiffusionIntegrator(int vector_dimension) : vdim(vector_dimension) {}
-
-   VectorDiffusionIntegrator(Coefficient &q) : Q(&q) {}
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
 
    /** \brief Integrator with scalar coefficient for caller-specified vector dimension.
 
@@ -2610,13 +2600,8 @@ public:
       If the vector demension does not match the true dimension of the \c
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
-<<<<<<< HEAD
    VectorDiffusionIntegrator(Coefficient &q, int vector_dimension)
       : Q(&q), vdim(vector_dimension), ceedDataPtr(NULL) { }
-=======
-   VectorDiffusionIntegrator(Coefficient &q, int vector_dimension) : Q(&q),
-      vdim(vector_dimension) {}
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
 
    /** \brief Integrator with \c VectorCoefficient. The vector dimension of the \c FiniteElementSpace is assumed to be the same as the dimension of the \c Vector.
 
@@ -2625,13 +2610,8 @@ public:
       If the vector demension does not match the true dimension of the \c
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
-<<<<<<< HEAD
    VectorDiffusionIntegrator(VectorCoefficient &vq)
       : VQ(&vq), vdim(vq.GetVDim()), ceedDataPtr(NULL) { }
-=======
-   VectorDiffusionIntegrator(VectorCoefficient& vq) : VQ(&vq),
-      vdim(vq.GetVDim()) {}
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
 
    /** \brief Integrator with \c MatrixCoefficient. The vector dimension of the \c FiniteElementSpace is assumed to be the same as the dimension of the \c Vector.
 
@@ -2641,7 +2621,6 @@ public:
       If the vector demension does not match the true dimension of the \c
       FiniteElementSpace , the resulting element matrix will be mathematically
       invalid. */
-<<<<<<< HEAD
    VectorDiffusionIntegrator(MatrixCoefficient& mq)
       : MQ(&mq), vdim(mq.GetVDim()), ceedDataPtr(NULL) { }
 
@@ -2649,10 +2628,6 @@ public:
    {
       delete ceedDataPtr;
    }
-=======
-   VectorDiffusionIntegrator(MatrixCoefficient& mq) : MQ(&mq),
-      vdim(mq.GetVDim()) {}
->>>>>>> ada8ce7b44762da95895b01b26747d73cddc6461
 
    virtual void AssembleElementMatrix(const FiniteElement &el,
                                       ElementTransformation &Trans,
